@@ -1,0 +1,15 @@
+{
+    "id": "{{myriad_frameworks.framework1.rm_name}}",
+    "cmd": "env && yarn resourcemanager",
+    "cpus": 0.2,
+    "mem": 2048.0,
+    "instances": 1,
+    "executor": "",
+    "backoffSeconds": 1,
+    "backoffFactor": 1.15,
+    "maxLaunchDelaySeconds": 3600,
+    "upgradeStrategy": {
+        "minimumHealthCapacity": 0.5,
+        "maximumOverCapacity": 0.2
+    }
+}

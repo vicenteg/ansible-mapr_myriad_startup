@@ -1,0 +1,8 @@
+---
+# tasks file for vicenteg.mapr_myriad_startup
+
+- name: copy marathon app configuration
+  template: src=resourcemanager.json.j2 dest=/tmp/resourcemanager.json mode=0600
+
+- name: create new marathon app
+  command: 'curl -X POST -H "Content-Type: application/json" http://localhost:8080/v2/apps -d @/tmp/resourcemanager.json'
