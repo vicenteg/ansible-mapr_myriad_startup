@@ -1,2 +1,4 @@
 ---
 # defaults file for vicenteg.mapr_myriad_startup
+
+marathon_port: 8080

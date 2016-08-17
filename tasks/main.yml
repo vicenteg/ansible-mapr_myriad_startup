@@ -4,5 +4,10 @@
 - name: copy marathon app configuration
   template: src=resourcemanager.json.j2 dest=/tmp/resourcemanager.json mode=0600
 
+- name: wait for marathon to be listening
+  wait_for: port={{marathon_port}} timeout=120
+  tags: test
+
 - name: create new marathon app
   command: 'curl -X POST -H "Content-Type: application/json" http://localhost:8080/v2/apps -d @/tmp/resourcemanager.json'
+  run_once: yes
