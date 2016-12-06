@@ -5,7 +5,7 @@
   template: src=resourcemanager.json.j2 dest=/tmp/resourcemanager.json mode=0600
 
 - name: find marathon
-  command: curl -L -s http://localhost:5050/frameworks | jq -r '.frameworks[] | select(.name == "marathon") | .webui_url'
+  shell: "curl -L -s http://{{ansible_fqdn}}:5050/frameworks | jq -r '.frameworks[] | select(.name == \"marathon\") | .webui_url'"
   register: marathon_webui
 
 - name: wait for marathon to be listening
@@ -13,5 +13,5 @@
   tags: test
 
 - name: create new marathon app
-  command: 'curl -X POST -H "Content-Type: application/json" http://{{marathon_webui}}/v2/apps -d @/tmp/resourcemanager.json'
+  command: 'curl -X POST -H "Content-Type: application/json" {{marathon_webui.stdout}}/v2/apps -d @/tmp/resourcemanager.json'
   run_once: yes
